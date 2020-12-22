@@ -1,0 +1,20 @@
+var beforeStuffing = "011111101111110".split("");
+var len = beforeStuffing.length;
+var stuffing = [];
+var flag = "01111110";
+
+for(var i = 0; i < len-4; i++){
+	var tempSlice = beforeStuffing.slice(i,i+5);	
+	if( tempSlice.join('') == "11111"){
+		stuffing = stuffing.concat(tempSlice);
+		stuffing = stuffing.concat('0');
+		i = i + 4;
+	}else{
+		stuffing = stuffing.concat(beforeStuffing[i]);
+	}
+}
+stuffing = stuffing.concat(beforeStuffing.slice(i, len+1));
+
+console.log("Before Stuffing: " + beforeStuffing.join('') + " -- " + beforeStuffing.join('').length + "characters\0");
+console.log("After Stuffing: " + stuffing.join('') + " -- " + stuffing.join('').length + "characters\0") ;
+console.log("After framing: " + flag+stuffing.join('')+flag);
